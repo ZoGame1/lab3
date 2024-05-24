@@ -1,56 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
-using System.Threading.Tasks;
-class Progam
+class Program
 {
+    private static string content;
+    static void Main()
+    {
+        Data();
+    }
+    static void Data()
+    {
+        string username = "Tai";
 
-	static void create()
-	{
-		Console.OutputEncoding = Encoding.UTF8;
-		string dataDirectory = @"Z:\Desktop\lab\Bai3Lab3";
-		Directory.CreateDirectory(dataDirectory);
-		string dataFilePath = Path.Combine(dataDirectory, "data.txt");
 
-		using (StreamWriter writer = new StreamWriter(dataFilePath))
-		{
-			writer.WriteLine("Mssv: PD11057");
-			writer.WriteLine("Họ và tên: PHAN VAN QUOC");
-			writer.WriteLine("Gmail: phanvanquoc1226@gmail.com");
-	
-	}
-		Console.WriteLine("Đã ghi xong: " + dataFilePath);
-	}
-	static void copy()
-	{
-		string sourceDirectory = @"..\\..\\..\data\\";
-		string targetDirectory = @"..\\..\\..\data2\\";
+        string password = "21412313";
+        string time = DateTime.Now.ToString();
 
-		if (Directory.Exists(sourceDirectory))
-		{
-			Directory.CreateDirectory(targetDirectory);
-			string[] files = Directory.GetFiles(sourceDirectory);
-			foreach (string file in files)
-			{
-				string fileName = Path.GetFileName(file);
-				string targetFile = Path.Combine(targetDirectory, fileName);
-				File.Copy(file, targetFile, true);
-			}
-			Console.WriteLine("Sao chép hoàn tất");
-		}
-		else
-		{
-			Console.WriteLine("Thư mục nguồn không tồn tại");
-		}
-	}
-	static void Main()
-	{
-		create();
-		copy();
-	}
+        using (StringWriter sw = new StringWriter())
+        {
+            string content = sw.ToString();
 
+            sw.WriteLine("UserName: " + username);
+            sw.WriteLine("PassWord: " + password);
+
+            Console.WriteLine(content);
+        }
+        using (StringReader sr = new StringReader(content))
+        {
+           
+            string line;
+            while ((line = sr.ReadLine()) != null)
+            {
+                Console.WriteLine(line);
+            }
+        }
+
+    }
 }
-
-
